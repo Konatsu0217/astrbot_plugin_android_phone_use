@@ -4,9 +4,9 @@ AstrBot 插件，连接 **AstrBot Android Launcher** 内置的手机操控服务
 
 ## 使用
 
-当前仅建立本地仓库，尚未发布 GitHub 在线安装地址。发布前应填写 metadata.yaml 的 repo 字段。
+本插件由 Konatsu0217 维护。AstrBot Android Launcher 随 APK 内置固定版本并自动部署，用户无需单独安装；源码在本仓库独立维护。
 
-1. 开发部署时，将本工程放入 AstrBot 的 `data/plugins/astrbot_plugin_android_phone_use` 目录，然后重载插件或重启 AstrBot；发布后可通过插件管理页安装。
+1. 使用内置版本时，更新 Android 启动器并启动 AstrBot 即可。开发或独立安装时，可将本工程放入 AstrBot 的 `data/plugins/astrbot_plugin_android_phone_use`，再重载插件或重启 AstrBot。
 2. 在同一手机的 Android 启动器进入「工作台 → 手机操控」，配置独立模式（Shizuku）或无障碍模式，并启用总开关。
 3. 由 AstrBot 管理员发起操控请求；聊天模型需要支持工具调用与图像输入。
 
@@ -19,9 +19,9 @@ AstrBot 插件，连接 **AstrBot Android Launcher** 内置的手机操控服务
 - `main.py`：AstrBot 插件入口、工具说明、管理员校验、多模态结果。
 - `phone_use/client.py`：有大小限制和超时的本地 Unix Socket 客户端，无设备逻辑。
 - `tests/`：真实 Unix Socket 分帧/错误边界测试及插件权限、多模态返回测试。
-- Android 工程：内置设备后端、同 UID 校验、会话及系统权限管理；不复制或覆盖此插件目录。
+- Android 工程：内置设备后端、同 UID 校验、会话及系统权限管理；仅在启动 AstrBot 前自动部署固定版本；保留已有手动安装或修改过的插件。
 
-插件通过 AstrBot 常规安装、更新和卸载流程维护，与 APK 分别版本管理。接口详见 [PROTOCOL.md](PROTOCOL.md)。开发规范参考 [AstrBot 官方插件指南](https://docs.astrbot.app/dev/star/plugin-new.html)。
+独立安装版本通过 AstrBot 插件管理维护；内置版本随 APK 固定，部署时不覆盖手动安装和修改，也不修改插件启停配置。接口详见 [PROTOCOL.md](PROTOCOL.md)。开发规范参考 [AstrBot 官方插件指南](https://docs.astrbot.app/dev/star/plugin-new.html)。
 
 ## 限制与隐私
 

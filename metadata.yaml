@@ -1,7 +1,7 @@
 name: astrbot_plugin_android_phone_use
 display_name: Android 手机操控
 desc: 通过 AstrBot Android Launcher 已启用的独立屏幕或无障碍会话操控手机，仅限管理员。
-version: v0.1.0
-author: AstrBotDevs
-repo: ""
+version: v0.1.1
+author: Konatsu0217
+repo: https://github.com/Konatsu0217/astrbot_plugin_android_phone_use
 astrbot_version: ">=4.29.4,<5"

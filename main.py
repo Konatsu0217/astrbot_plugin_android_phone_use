@@ -10,7 +10,7 @@ from astrbot.api.star import Context, Star, register
 from .phone_use import client as _client
 
 
-@register("astrbot_plugin_android_phone_use", "AstrBotDevs", "Android phone-control tools", "0.1.0")
+@register("astrbot_plugin_android_phone_use", "Konatsu0217", "Android phone-control tools", "0.1.1")
 class AndroidPhoneUse(Star):
     def __init__(self, context: Context):
         super().__init__(context)
