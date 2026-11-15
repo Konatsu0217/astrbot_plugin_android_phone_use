@@ -2,6 +2,8 @@
 
 import asyncio
 import json
+import os
+import sys
 
 import mcp.types
 from astrbot.api.event import AstrMessageEvent, filter
@@ -10,7 +12,7 @@ from astrbot.api.star import Context, Star, register
 from .phone_use import client as _client
 
 
-@register("astrbot_plugin_android_phone_use", "Konatsu0217", "Android phone-control tools", "0.1.1")
+@register("astrbot_plugin_android_phone_use", "Konatsu0217", "Android phone-control tools", "0.1.2")
 class AndroidPhoneUse(Star):
     def __init__(self, context: Context):
         super().__init__(context)
@@ -33,6 +35,8 @@ class AndroidPhoneUse(Star):
         # Match the upstream administrator role before allowing a remote chat to control the device.
         if not event.is_admin():
             return json.dumps({"ok": False, "error": "administrator_required"})
+        if sys.platform != "linux" or os.environ.get("ASTRBOT_CLIENT") != "astrbot-android":
+            return json.dumps({"ok": False, "error": "android_only"})
         try:
             if not isinstance(arguments, dict) or not isinstance(action, str):
                 return json.dumps({"ok": False, "error": "invalid_arguments"})

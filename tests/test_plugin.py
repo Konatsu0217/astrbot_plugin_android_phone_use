@@ -48,6 +48,9 @@ class PhoneUsePluginTest(unittest.IsolatedAsyncioTestCase):
         modules[spec.name] = self.module
         with patch.dict(sys.modules, modules):
             spec.loader.exec_module(self.module)
+        android_environment = patch.dict("os.environ", {"ASTRBOT_CLIENT": "astrbot-android"})
+        android_environment.start()
+        self.addCleanup(android_environment.stop)
         self.plugin = self.module.AndroidPhoneUse(object())
         self.event = types.SimpleNamespace(is_admin=lambda: True)
 
@@ -71,6 +74,13 @@ class PhoneUsePluginTest(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(result.content[1].mimeType, "image/jpeg")
         self.assertEqual(result.content[1].data, "aW1hZ2U=")
         self.assertNotIn("imageBase64", result.content[0].text)
+
+    async def test_non_android_environment_never_reaches_bridge(self):
+        with patch.dict("os.environ", {"ASTRBOT_CLIENT": "other"}):
+            with patch.object(self.module._client, "request") as call:
+                result = await self.plugin.phone_use(self.event, "status", {})
+        self.assertEqual(json.loads(result)["error"], "android_only")
+        call.assert_not_called()
 
     async def test_invalid_arguments_do_not_reach_bridge(self):
         with patch.object(self.module._client, "request") as call:
