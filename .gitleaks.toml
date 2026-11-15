@@ -1,0 +1,28 @@
+title = "AstrBot repository credential audit"
+[extend]
+useDefault = true
+
+[[rules]]
+id = "volcengine-ark-key"
+description = "Volcengine Ark API key"
+regex = '''\bark-[a-zA-Z0-9][a-zA-Z0-9_-]{20,}\b'''
+keywords = ["ark-"]
+
+[[rules]]
+id = "cloudflare-account-api-token"
+description = "Cloudflare account API token"
+regex = '''\bcfat_[A-Za-z0-9_-]{25,}\b'''
+keywords = ["cfat_"]
+
+[[rules]]
+id = "huggingface-access-token"
+description = "Hugging Face access token"
+regex = '''\bhf_[A-Za-z0-9]{25,}\b'''
+keywords = ["hf_"]
+
+[[rules]]
+id = "hardcoded-hex-credential"
+description = "Multiline hardcoded authentication credential"
+regex = '''(?i)\b[a-z0-9_]*(?:secret|api_?key|access_?token|auth_?token)[a-z0-9_]*[ \t]*(?::[ \t]*String)?[ \t]*=[ \t\r\n]*["']([a-f0-9]{32,128})["']'''
+secretGroup = 1
+keywords = ["secret", "api_key", "apikey", "access_token", "auth_token"]

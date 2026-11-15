@@ -1,0 +1,2 @@
+# AstrBot provides the MCP content types used for multimodal tool results.
+mcp>=1.8.0,<2
