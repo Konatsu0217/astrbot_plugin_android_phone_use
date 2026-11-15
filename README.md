@@ -4,7 +4,9 @@ AstrBot 插件，连接 **AstrBot Android Launcher** 内置的手机操控服务
 
 ## 使用
 
-1. 在 AstrBot 的插件管理页通过本仓库地址安装，然后重载插件或重启 AstrBot。
+当前仅建立本地仓库，尚未发布 GitHub 在线安装地址。发布前应填写 metadata.yaml 的 repo 字段。
+
+1. 开发部署时，将本工程放入 AstrBot 的 `data/plugins/astrbot_plugin_android_phone_use` 目录，然后重载插件或重启 AstrBot；发布后可通过插件管理页安装。
 2. 在同一手机的 Android 启动器进入「工作台 → 手机操控」，配置独立模式（Shizuku）或无障碍模式，并启用总开关。
 3. 由 AstrBot 管理员发起操控请求；聊天模型需要支持工具调用与图像输入。
 
